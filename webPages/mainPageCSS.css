@@ -9,8 +9,12 @@ input
 	padding-bottom:5px;
 	border-radius: 10px;
 	background:#7FFFD4;
-
 	
+}
+
+#createAccountForm
+{
+	float:left;
 }
 
 #header ul li
@@ -21,7 +25,6 @@ input
     width:150px;
     height: 50px;
     text-align: center;
-    background-color: #3FA985;
     line-height: 50px;
     border: solid;
     border-width: 1px 1px 0 1px;
@@ -61,11 +64,14 @@ input
 {
     top:1px;
     background-color:white;
+    padding: 10px 20px 10px 10px;
 }
 
 .unselected
 {
-    
+    top:20px;
+    background-color: #3FA985;
+
 }
 
 #status
@@ -77,11 +83,13 @@ input
 	padding-top:1px;
 	padding-bottom:1px;
 	height:130px;
+	box-shadow: 10px 10px 5px #888888;
+
 }
 
 #profilePic
 {
-	
+	border:1px solid;	
 	border-radius:50px;
 	float:left;
 	width:100px;

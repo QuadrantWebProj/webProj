@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
+
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 <title>Quadrant main page</title>
@@ -9,20 +10,38 @@
 
 
 </style>
+<script type="text/javascript">
+
+function clickedTab(){
+
+	document.body.style.backgroundColor="#f3f3f3";
+	var x = document.getElementById("aTab");
+	var length = x.getLength();
+	for(length; length>0; length++{
+		v[length-1].className="unselected";
+	}
+}
+
+
+
+</script>
+
+
+
 <link href="mainPageCSS.css" rel="stylesheet" type="text/css" />
 </head>
 
-<body style="background-color: #808080;">
+<body>
 
 <div id="header">
 	<div>
 		<img alt="" height="58" src="quadrant.png" width="225" />		
 	</div>
 <ul>
-<li class="selected">Friends</li>
-<li class="unselected">Market</li>
-<li class="unselected">News</li>
-<li class="unselected">My Account</li>
+<li class="selected" id="aTab">Friends</li>
+<li onclick="clickedTab(); this.class=selected;" class="unselected" id="aTab">Market</li>
+<li class="unselected" id="aTab">News</li>
+<li class="unselected" id="aTab">My Account</li>
 </ul>
 
 </div>
