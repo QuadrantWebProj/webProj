@@ -19,44 +19,42 @@ public class DBConnection {
     String dburl;
     Connection conn;
     Properties connprops;
+    ResultSet user;
 
     DBConnection(String dburl) {
         this.dburl = dburl;
         this.conn = null;
         this.connprops = new Properties();
-        this.connprops.put("user", "root");
-        this.connprops.put("password", "root");
+        this.connprops.put("user", "ismi01");
+        this.connprops.put("password", "K8dKjuSx");
+        this.user = null;
     }
 
-    public String connectDB(){
+    public boolean connectDB(){
         try {
-            this.conn = DriverManager.getConnection("jdbc:mysql://"+this.dburl+"/quadrantdb",this.connprops);
+            this.conn = DriverManager.getConnection("jdbc:mysql://"+this.dburl+"/ismi01",this.connprops);
         } catch (SQLException ex) {
             
-            return ex.getLocalizedMessage();
+            return false;
         }
-        return "yay";
+        return true;
     }
     
-    public String find(String username) {
+    public boolean setUser(String username) {
         Statement statement = null;
-        ResultSet result = null;
-        String query = "select * from user_table where email=\'"+username+"\';";
-        String check = null;
+        this.user = null;
+        String query = "select * from quad_user_table where email=\'"+username+"\';";
         try {
             statement = this.conn.createStatement();
-            result = statement.executeQuery(query);
-            if(result.getString("Email").contentEquals(username)){
-                    check = "yay";
-            }
-            while(result.next()){
-                if(result.getString("Email").contentEquals(username)){
-                    check = "yay";
+            this.user = statement.executeQuery(query);
+            while(this.user.next()){
+                if(this.user.getString("Email").contentEquals(username)){
+                    return true;
                 }
             }
         } catch (SQLException ex) {
-            check = query;
+            return false;
         }
-        return check;
+        return false;
     }
 }

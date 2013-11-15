@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -29,41 +31,49 @@ public class Login extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    String dburl = "localhost:3306";
+    String dburl = "itweb.cs.nmt.edu:3306";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
+        /* make sure that the username and password is not empty */
         String uname = request.getParameter("UserName");
         String pword = request.getParameter("Password");
         if (uname == null || pword == null || uname.isEmpty() || pword.isEmpty()) {
             response.sendRedirect("./loginTest.html");
         }
-
+        /* create the connection */
         DBConnection db = new DBConnection(this.dburl);
-        String check = db.connectDB();
-        if(!check.contentEquals("yay")){
-            response.sendError(500,check);
+        if (!db.connectDB()) {
+            response.sendError(500, "failed to connect to database!");
         }
-        
-        check = db.find(uname);
-        if(!check.contentEquals("yay")){
-            response.sendError(500,check);
+        /* find the user */
+        if (!db.setUser(uname)) {
+            response.sendError(500, "failed to find user!");
+        }
+        /* check password TODO need to hash this */
+        try {
+            if (!db.user.getString("Password").equals(pword)) {
+                response.sendError(401, "the password is incorrect.");
+            }
+        } catch (SQLException ex) {
+            response.sendError(500, "we couldn't get the password from the database!");
         }
 
         PrintWriter out = response.getWriter();
         try {
-            /* TODO output your page here. You may use following sample code. */
+            /* TODO something more substantial */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet Login</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Login at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Welcome, "+db.user.getString("Firstname")+" "+db.user.getString("Lastname")+"</h1>");
             out.println("</body>");
             out.println("</html>");
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             out.close();
         }
