@@ -1,0 +1,103 @@
+﻿body 
+{
+	background-color:#808080;
+}
+
+input
+{
+	padding:3px;
+	padding-bottom:5px;
+	border-radius: 10px;
+	background:#7FFFD4;
+	
+}
+
+#createAccountForm
+{
+	float:left;
+}
+
+#header ul li
+{
+    list-style: none;
+    position: relative;
+    float: left;
+    width:150px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    border: solid;
+    border-width: 1px 1px 0 1px;
+    border-color:#ffffff;
+}
+#header li a
+{
+    text-decoration:none;
+    color: #ffffff;
+}	
+
+#tab-content
+{
+    border: 1px solid #ffffff;
+    background-color: #FFFFFF;
+    width:80%;
+    height: auto;
+    margin-left:40px;
+    padding: 10px 10px 10px 10px;
+    clear:both;
+}
+
+#tab-01{
+    display:block;
+}
+#tab-02{
+    display:none;
+}
+#tab-03{
+    display:none;
+}
+#tab-04{
+    display:none;
+}
+
+.selected
+{
+    top:1px;
+    background-color:white;
+    padding: 10px 20px 10px 10px;
+}
+
+.unselected
+{
+    top:20px;
+    background-color: #3FA985;
+
+}
+
+#status
+{
+	border:2px solid;
+	border-radius:40px;
+	background-color:#CAFBC7;
+	width:60%;
+	padding-top:1px;
+	padding-bottom:1px;
+	height:130px;
+	box-shadow: 10px 10px 5px #888888;
+
+}
+
+#profilePic
+{
+	border:1px solid;	
+	border-radius:50px;
+	float:left;
+	width:100px;
+	height:100px;
+	
+}
+
+#statusSpacing{
+	
+	width:50px;
+}
