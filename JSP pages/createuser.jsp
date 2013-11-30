@@ -48,7 +48,7 @@
             /* Done! Now, setup the session and redirect to profile page! */
             session.setAttribute("userID", id);
             session.setAttribute("password", password);
-            response.sendRedirect("profile.jsp");
+            request.getRequestDispatcher("profile.jsp").forward(request, response);
         }
     } catch (SQLException ex) {
         response.sendError(500, ex.getLocalizedMessage());

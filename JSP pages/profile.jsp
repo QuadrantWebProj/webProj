@@ -13,11 +13,9 @@
     id = (Integer) session.getAttribute("userID");
     String password = null;
     password = (String) session.getAttribute("password");
-
     /* if session doesn't match required format, go back to login */
     if (id == null || id < 1 || password == null || password.contentEquals("")) {
-        //response.sendRedirect("login.jsp");
-        response.sendError(500, "session is fucked, yo");
+        response.sendError(500, "The session is messed up!");
     } else {
         /* double check that this is a valid id/pass pair */
         String dburl = "jdbc:mysql://itweb.cs.nmt.edu:3306/ismi01";
@@ -41,8 +39,7 @@
                 }
             }
             if (valid == false) {
-                //response.sendRedirect("login.jsp");
-                response.sendError(500, "session is fucked, yo");
+                response.sendError(403, "Log-in details have expired. Please log-in again.");
             }
         } catch (SQLException ex) {
             response.sendError(500, ex.getLocalizedMessage());

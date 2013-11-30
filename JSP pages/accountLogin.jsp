@@ -11,8 +11,7 @@
     String param = request.getParameter("button");
     String email = null;
     String password = null;
-    String firstname = null;
-    String lastname = null;
+
     if (param.contentEquals("New Member")) {
         /* Need to register */
         response.sendRedirect("register.jsp");
@@ -39,11 +38,12 @@
                 /* we found a user with that email, now check password */
                 if (!result.getString("password").contentEquals(password)) {
                     response.sendError(403, "Incorrect password.");
-                }else{
+                } else {
                     /* login verified */
                     session.setAttribute("userID", Integer.parseInt(result.getString("UserID")));
                     session.setAttribute("password", password);
-                    response.sendRedirect("profile.jsp");
+                    request.getRequestDispatcher("profile.jsp").forward(request, response);
+                    //response.sendError(500, "id = "+Integer.parseInt(result.getString("UserID"))+"\nsession = "+session.getAttribute("userID"));
                 }
             } else {
                 response.sendError(403, "No user with given email found.");
@@ -51,19 +51,7 @@
         } catch (SQLException ex) {
             response.sendError(500, ex.getLocalizedMessage());
         }
-        
-        
-        
+
     }
 %>
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Logging In</title>
-    </head>
-    <body>
-        <h1>Hello <%= firstname%> <%= lastname%>! </h1>
-    </body>
-</html>
