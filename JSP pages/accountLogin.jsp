@@ -39,6 +39,11 @@
                 /* we found a user with that email, now check password */
                 if (!result.getString("password").contentEquals(password)) {
                     response.sendError(403, "Incorrect password.");
+                }else{
+                    /* login verified */
+                    session.setAttribute("userID", Integer.parseInt(result.getString("UserID")));
+                    session.setAttribute("password", password);
+                    response.sendRedirect("profile.jsp");
                 }
             } else {
                 response.sendError(403, "No user with given email found.");
@@ -47,9 +52,8 @@
             response.sendError(500, ex.getLocalizedMessage());
         }
         
-        /* login verified */
-        firstname = result.getString("Firstname");
-        lastname = result.getString("Lastname");
+        
+        
     }
 %>
 
