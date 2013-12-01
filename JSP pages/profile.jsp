@@ -11,6 +11,8 @@
     String name= null;
     String city = null;
     String state = null;
+	String profilePic = null;
+
 
     Integer id = null;
     id = (Integer) session.getAttribute("userID");
@@ -43,6 +45,7 @@
                     name = result.getString("Firstname") + " " + result.getString("Lastname");
                     city = result.getString("City");
                     state = result.getString("State");
+					profilePic = result.getString("profilePic");
                 }
             }
             if (valid == false) {
@@ -96,7 +99,7 @@
 
 	<div id="tab-content">
     <div id="tab-01">
-		<img id="profilePic" alt="" src="http://sitmeanssit.com/dog-training-mu/houston-dog-training/files/2013/03/puppy.jpeghttp://sitmeanssit.com/dog-training-mu/houston-dog-training/files/2013/03/puppy.jpeg" />
+		<img id="profilePic" alt="" src="<%=profilePic%>" />
 		<div id="profileInfo" style="width: 100%;">
 			<h2><%=name%></h2>
 			<h3><%=city%></h3>

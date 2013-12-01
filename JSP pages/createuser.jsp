@@ -14,6 +14,7 @@
     String city = request.getParameter("city");
     String state = request.getParameter("state");
     String password = request.getParameter("password");
+    String profilePic = request.getParameter("profilePic");
 
     String dburl = "jdbc:mysql://itweb.cs.nmt.edu:3306/ismi01";
     String dbusername = "ismi01";
@@ -42,8 +43,8 @@
                 result = statement.executeQuery(query);
             } while (result.next());
             /* email appears to be unique, create new user in DB */
-            query = "INSERT INTO quad_user_table (Email, Firstname, Lastname, UserID, Password, City, State) "
-                    + "VALUES ('" + email + "', '" + firstname + "', '" + lastname + "', '" + id + "', '" + password + "', '" + city + "', '" + state + "');";
+            query = "INSERT INTO quad_user_table (Email, Firstname, Lastname, UserID, Password, City, State, profilePic) "
+                    + "VALUES ('" + email + "', '" + firstname + "', '" + lastname + "', '" + id + "', '" + password + "', '" + city + "', '" + state + "', '" + profilePic + "');";
             statement.executeUpdate(query);
             /* Done! Now, setup the session and redirect to profile page! */
             session.setAttribute("userID", id);

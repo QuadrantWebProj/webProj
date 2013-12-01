@@ -23,6 +23,15 @@
                 fail = true;
                 failArray.push("fname");
             }
+
+			/*profile picture link*/
+            formdata = document.forms["registerform"]["profilePic"].value;
+            if (formdata == null || formdata == "")
+            {
+                fail = true;
+                failArray.push("profilePic");
+            }
+	
             /* last name */
             formdata = document.forms["registerform"]["lastName"].value;
             if (!regex.test(formdata))
@@ -84,6 +93,8 @@
                     alertString = alertString + "\n email address";
                 if (compare == "city")
                     alertString = alertString + "\n city";
+				if (compare == "profilePic")
+                    alertString = alertString + "\n Profile picture link";
             }
             alert(alertString);
             return true;
@@ -190,6 +201,10 @@
                     <tr>
                         <td>Re-enter password:</td>
                         <td><input name="passwordcheck" type="password"/></td>
+                    </tr>
+		    		<tr>
+                        <td>Link to photo to be used as profile picture:</td>
+                        <td><input name="profilePic" type="text"/></td>
                     </tr>
                 </table>
                 <button type="submit">Submit</button>
