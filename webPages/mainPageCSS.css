@@ -97,6 +97,13 @@ input
 	
 }
 
+#profileInfo
+{
+	width=auto;
+	float:left;
+	background-color:#CAFBC7;
+	
+}
 #statusSpacing{
 	
 	width:50px;

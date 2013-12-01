@@ -8,6 +8,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     boolean valid = false;
+    String name= null;
+    String city = null;
+    String state = null;
 
     Integer id = null;
     id = (Integer) session.getAttribute("userID");
@@ -26,6 +29,7 @@
         ResultSet result = null;
         String query = null;
 
+
         try {
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection(dburl, dbusername, dbpassword);
@@ -36,6 +40,9 @@
             if (result.next()) {
                 if (result.getString("Password").contentEquals(password)) {
                     valid = true;
+                    name = result.getString("Firstname") + " " + result.getString("Lastname");
+                    city = result.getString("City");
+                    state = result.getString("State");
                 }
             }
             if (valid == false) {
@@ -50,12 +57,45 @@
 
 %>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Quadrant</title>
-    </head>
-    <body>
-        <h1>Imagine a cool profile page that shows friend statuses and local news stories</h1>
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Untitled 1</title>
+<link href="http://itweb.cs.nmt.edu/~dfahey/Quadrant/mainpageCSS.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+	<div id="header">
+	<div>
+		<img alt="" height="58" src="quadrant.png" width="225" />
+		<ul>
+			<li class="selected" id="aTab">About</li>
+			<li class="unselected" id="aTab">Updates</li>
+		</ul>
+		
+	</div>
+	</div>
+
+	<div id="tab-content">
+    <div id="tab-01">
+		<img id="profilePic" alt="" src="http://sitmeanssit.com/dog-training-mu/houston-dog-training/files/2013/03/puppy.jpeghttp://sitmeanssit.com/dog-training-mu/houston-dog-training/files/2013/03/puppy.jpeg" />
+		<div id="profileInfo">
+			<h2><%=name%></h2>
+			<h3><%=city%></h3>
+			<h3><%=state%></h3>
+		</div>
+		<br>
+		<div>
+			<br>
+			<br><br><br><br><br><br>
+		</div>
+	</div>
+	<br>
+	</div>
+
+
+</body>
+
 </html>
+
