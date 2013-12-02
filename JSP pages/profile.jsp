@@ -11,8 +11,12 @@
     String name= null;
     String city = null;
     String state = null;
-        String profilePic = null;
+    String profilePic = null;
 
+    String query = null;
+    Connection connection = null;
+    Statement statement = null;
+    ResultSet result = null;
 
     Integer uid = null;
     uid = (Integer) session.getAttribute("userID");
@@ -29,10 +33,7 @@
         String dburl = "jdbc:mysql://itweb.cs.nmt.edu:3306/ismi01";
         String dbusername = "ismi01";
         String dbpassword = "K8dKjuSx";
-        Connection connection = null;
-        Statement statement = null;
-        ResultSet result = null;
-        String query = null;
+
 
 
         try {
@@ -117,6 +118,22 @@
         <div id="tab-content">
             <div id="tab-01">
                 <img id="profilePic" alt="" src="<%=profilePic%>" />
+                <%
+                Boolean friend=false;
+                query = "SELECT * FROM friendTable WHERE UserID='" + uid + "';";
+                statement = connection.createStatement();
+                result = statement.executeQuery(query);
+                while(result.next()){
+                    if(Integer.parseInt(result.getString("friendID")) == rid ){
+                        friend = true;
+                    }
+                }
+                if(uid != rid & !friend ){%>
+                    <div id="friendButton">
+			<a href="requestFriend.jsp?requester=<%=uid%>&user=<%=rid%>" class="fill-div">Request Friendship</a>
+                    </div>   
+                <%}%>
+
                 <div id="profileInfo" style="width: 100%;">
                     <h2><%=name%></h2>
                     <h3><%=city%></h3>
@@ -127,7 +144,7 @@
                         <br>
                             <br><br><br><br><br><br><br><br><br><br><br><br>
 
-                                                                            </div>
+                   </div>
                                                                             </div>
                                                                             <br>
                                                                                 </div>

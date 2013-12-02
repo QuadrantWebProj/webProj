@@ -33,7 +33,7 @@ input
 #header li a
 {
     text-decoration:none;
-    color: #ffffff;
+    color: #000000;
 }	
 
 #tab-content
@@ -95,7 +95,7 @@ input
 	width:100px;
 	height:100px;
 	
-}
+} 
 
 #profileInfo
 {
@@ -107,4 +107,20 @@ input
 #statusSpacing{
 	
 	width:50px;
+}
+
+#friendButton
+{
+	float:right;
+	height:50px;
+	width:100px;
+	background-color:lime;
+}
+
+#friendButton a
+{
+    text-decoration:none;
+    color:black;
+
+	
 }
