@@ -120,20 +120,36 @@
                 <img id="profilePic" alt="" src="<%=profilePic%>" />
                 <%
                 Boolean friend=false;
+                Boolean requested=false;
+
+
                 query = "SELECT * FROM friendTable WHERE UserID='" + uid + "';";
                 statement = connection.createStatement();
                 result = statement.executeQuery(query);
+                
                 while(result.next()){
                     if(Integer.parseInt(result.getString("friendID")) == rid ){
                         friend = true;
+                        if((result.getString("requestOrExisting")).equals("req")){
+                            requested=true;
+                        }
                     }
                 }
                 if(uid != rid & !friend ){%>
                     <div id="friendButton">
-			<a href="requestFriend.jsp?requester=<%=uid%>&user=<%=rid%>" class="fill-div">Request Friendship</a>
+			<a href="requestFriend.jsp?requestUser=<%=rid%>" class="fill-div">Request Friendship</a>
                     </div>   
+                <%}
+                else if(requested){%>
+                    <div id="friendButton">
+			Requested
+                    </div>
+                <%}
+                else if(uid != rid){%>
+                    <div id="friendButton">
+			Friends
+                    </div>
                 <%}%>
-
                 <div id="profileInfo" style="width: 100%;">
                     <h2><%=name%></h2>
                     <h3><%=city%></h3>
