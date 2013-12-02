@@ -42,7 +42,7 @@
                     /* login verified */
                     session.setAttribute("userID", Integer.parseInt(result.getString("UserID")));
                     session.setAttribute("password", password);
-                    request.getRequestDispatcher("profile.jsp").forward(request, response);
+                    request.getRequestDispatcher("profile.jsp?user="+ Integer.parseInt(result.getString("UserID"))).forward(request, response);
                     //response.sendError(500, "id = "+Integer.parseInt(result.getString("UserID"))+"\nsession = "+session.getAttribute("userID"));
                 }
             } else {
