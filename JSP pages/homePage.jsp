@@ -107,7 +107,7 @@
 		<li  id="menu-01" class="selected"><a href="javascript:void(0);" class="fill-div" onclick="animate_tab('menu-01');">Friends</a></li>
       		<li class="unselected" id="menu-02"><a href="javascript:void(0);" class="fill-div" onclick="animate_tab('menu-02');">Friend requests</a></li>
 		<li class="unselected" id="menu-03"><a href="javascript:void(0);" class="fill-div" onclick="animate_tab('menu-03');">Market</a></li>
-		<li class="unselected" id="menu-04"><a href="javascript:void(0);" class="fill-div" onclick="animate_tab('menu-04');">news</a></li>
+		<li class="unselected" id="menu-04"><a href="javascript:void(0);" class="fill-div" onclick="animate_tab('menu-04');">Discover Users</a></li>
 		<li class="unselected" id="menu-05"><a href="profile.jsp?user=<%=uid%>" class="fill-div">My Profile</a></li>
 		<li class="unselected" id="menu-06"><a href="logout.jsp" class="fill-div">Logout</a></li>
 
@@ -163,7 +163,38 @@
         Content in Tab 03 goes here.
     </div>
     <div id="tab-04">
-        Content in Tab 04 goes here.
+        <%//list unfriended users
+        tempID= 0;
+        query = "SELECT * FROM quad_user_table";
+        statement = connection.createStatement();
+        result = statement.executeQuery(query);
+
+        while(result.next()){
+            tempID = Integer.parseInt(result.getString("userID"));
+            query = "SELECT * FROM friendTable WHERE UserID='" + tempID + "' AND friendID='" + uid + "';";
+            statement2 = connection.createStatement();
+            result2 = statement2.executeQuery(query);
+            if(!result2.next() & tempID != uid){
+
+                name = result.getString("Firstname") + " " + result.getString("Lastname");
+                profilePic = result.getString("profilePic");
+        %>
+            <div id="status">
+        	<div id="statusSpacing">
+        	</div>
+	       	<div>        	
+                    <img id="profilePic" src="<%=profilePic%>" />
+                    <h3 id="userName"><%=name%></h3>
+
+                </div>
+                <div id="statusText">
+                    <div id="friendAcceptButton">
+			<a href="requestFriend.jsp?requestUser=<%=tempID%>" class="fill-div">Request Friendship</a>
+                    </div>
+                </div>
+            </div>
+
+        <%}}%>
     </div>
     
     
