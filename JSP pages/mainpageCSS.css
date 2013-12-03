@@ -12,6 +12,11 @@ input
 	
 }
 
+textarea
+{
+	resize: none; 
+}
+
 #createAccountForm
 {
 	float:left;
@@ -118,6 +123,22 @@ input
 }
 
 #friendButton a
+{
+    text-decoration:none;
+    color:black;
+
+	
+}
+
+#friendAcceptButton
+{
+	float:left;
+	height:40px;
+	width:70px;
+	background-color:lime;
+}
+
+#friendAcceptButton a
 {
     text-decoration:none;
     color:black;

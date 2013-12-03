@@ -19,12 +19,15 @@
     ResultSet result = null;
 
     Integer uid = null;
+    Integer rid = null;
     uid = (Integer) session.getAttribute("userID");
     String password = null;
     password = (String) session.getAttribute("password");
 
     //get requested user id profile from passes parameter
-    Integer rid = Integer.parseInt(request.getParameter("user"));
+    if(request.getParameter("user") != null){
+        rid = Integer.parseInt(request.getParameter("user"));
+    }
     /* if session doesn't match required format, go back to login */
     if (uid == null || uid < 1 || password == null || password.contentEquals("")) {
         response.sendError(500, "The session is messed up!");
@@ -104,10 +107,10 @@
     <body>
         <div id="header">
             <div>
-                <img alt="" height="58" src="quadrant.png" width="225" />
+                <a href="homePage.jsp"><img alt="" height="58" src="quadrant.png" width="225" /></a>
                 <ul>
-                    <li id="menu-01" class="selected"><a href="javascript:void(0);" class="fill-div" onclick="animate_tab('menu-01');">About</a></li>
-                    <li class="unselected" id="menu-02"><a href="javascript:void(0);" class="fill-div" onclick="animate_tab('menu-02');">Updates</a></li>
+                    <li id="menu-01" class="selected"><a href="javascript:void(0);" class="fill-div" onclick="animate_tab('menu-01');">Updates</a></li>
+                    <li class="unselected" id="menu-02"><a href="javascript:void(0);" class="fill-div" onclick="animate_tab('menu-02');">About</a></li>
                     <li class="unselected" id="menu-03"><a href="logout.jsp" class="fill-div">Logout</a></li>
 
                 </ul>
@@ -116,7 +119,7 @@
         </div>
 
         <div id="tab-content">
-            <div id="tab-01">
+            <div id="tab-02">
                 <img id="profilePic" alt="" src="<%=profilePic%>" />
                 <%
                 Boolean friend=false;
@@ -161,13 +164,36 @@
                             <br><br><br><br><br><br><br><br><br><br><br><br>
 
                    </div>
-                                                                            </div>
-                                                                            <br>
-                                                                                </div>
+             </div>
+                
+                <div id="tab-01">
+                    <%if(uid == rid){%>
+                    <form action="postUpdate.jsp">
+                        <div id="status">
+                            <div id="statusSpacing">
+                        </div>
+                        <div>        	
+                            <img id="profilePic" src="<%=profilePic%>" />
+                            <h3 id="userName"><%=name%></h3>
+                        </div>
+			<div id="statusText">
+                            <textarea type="text" rows="3" cols="50" name="status" ></textarea>
+                            <button type="submit">Broadcast Status</button>
+			</div>
+	 
+                    </div>
+
+                        
+                    </form>
+                    <%}%>
+                    
+                </div>
+                                                                            
+       </div>
 
 
-                                                                                </body>
+</body>
 
-                                                                                </html>
+</html>
 
 

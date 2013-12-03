@@ -11,20 +11,20 @@
 
 </style>
 <script type="text/javascript">
-
-function clickedTab(){
-
-	document.body.style.backgroundColor="#f3f3f3";
-	var x = document.getElementById("aTab");
-	var length = x.getLength();
-	for(length; length>0; length++{
-		v[length-1].className="unselected";
-	}
-}
-
-
-
-</script>
+    function animate_tab(menuId){
+    var no_of_tabs = 5+1;
+    for(i = 1; i < no_of_tabs; i++){
+        menu_id = "menu-0"+i.toString();
+        tab_id  = "tab-0"+i.toString();
+        if(menu_id == menuId){
+            document.getElementById(menu_id).className  = 'selected';
+            document.getElementById(tab_id).style.display = 'block';
+        }else{
+            document.getElementById(menu_id).className  = 'unselected';
+            document.getElementById(tab_id).style.display = 'none';
+        }
+    }
+}</script>
 
 
 
@@ -37,12 +37,14 @@ function clickedTab(){
 	<div>
 		<img alt="" height="58" src="quadrant.png" width="225" />		
 	</div>
-<ul>
-<li class="selected" id="aTab">Friends</li>
-<li onclick="clickedTab(); this.class=selected;" class="unselected" id="aTab">Market</li>
-<li class="unselected" id="aTab">News</li>
-<li class="unselected" id="aTab">My Account</li>
-</ul>
+	<ul>	
+		<li  id="menu-01" class="selected"><a href="javascript:void(0);" class="fill-div" onclick="animate_tab('menu-01');">Friends</a></li>
+		<li class="unselected" id="menu-02"><a href="javascript:void(0);" class="fill-div" onclick="animate_tab('menu-02');">Market</a></li>
+		<li class="unselected" id="menu-03"><a href="javascript:void(0);" class="fill-div" onclick="animate_tab('menu-03');">news</a></li>
+		<li class="unselected" id="menu-04"><a href="javascript:void(0);" class="fill-div" onclick="animate_tab('menu-04');">My Account</a></li>
+		<li class="unselected" id="menu-03"><a href="logout.jsp" class="fill-div">Logout</a></li>
+
+	</ul>
 
 </div>
 
