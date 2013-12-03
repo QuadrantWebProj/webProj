@@ -117,7 +117,7 @@
         </div>
         <br/>
         <div id="createAccountForm">
-            <form name="registerform" onsubmit="return validateForm();" action="createuser.jsp">
+            <form name="registerform" onsubmit="return validateForm();" action="createuser.jsp" method="POST">
                 <table border="0" cellspacing="1" cellpadding="1">
                     <tr>
                         <td>First Name:</td>

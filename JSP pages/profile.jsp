@@ -74,7 +74,7 @@
             response.sendError(500, ex.getLocalizedMessage());
         }
 
-    }
+    
 
 
 %>
@@ -184,7 +184,7 @@
 
                         
                     </form>
-                    <%}%>
+                    <%}}%>
                     
                 </div>
                                                                             
