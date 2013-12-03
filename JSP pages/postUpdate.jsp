@@ -21,7 +21,7 @@
 
     //get requested user id profile from passes parameter
     if(request.getParameter("status") != null){
-        status = Integer.parseInt(request.getParameter("status"));
+        status = request.getParameter("status");
     }
     else{
         response.sendError(500, "you are skipping steps! You broke something");
@@ -48,17 +48,37 @@
                 //check for a valid session
                 if (result.getString("Password").contentEquals(password)) {
                     valid = true;
+
+                    int storyID = 0;
+                    do {
+                        storyID++;
+                        query = "SELECT * FROM storyTable WHERE storyID='" + storyID + "';";
+                        result = statement.executeQuery(query);
+                    } while (result.next());
                     
-                    //update the original friend request to existing
-                    query = "UPDATE friendTable SET requestOrExisting='exist' WHERE friendID='" + uid + "' AND userID='" + rid + "'";
+                    //update story table with new story
+                    query = "INSERT INTO storyTable (storyID, authorID, content) VALUES ('" + storyID + "', '" + uid + "','" + status + "')";
                     statement = connection.createStatement();
                     statement.executeUpdate(query);
 
-                    //add other side of friendship since request was only one directional
-                    query = "INSERT INTO friendTable (userID, friendID, requestOrExisting) VALUES ('" + uid + "', '" + rid + "', '" + "exist" +"');";
+                    //select all friends of current user
+                    query="SELECT * FROM friendTable WHERE userID='" + uid + "' AND requestOrExisting='exist'";
+                    statement = connection.createStatement();
+                    result = statement.executeQuery(query);
+
+                    //insert your story into your own update table
+                    query = "INSERT INTO UT" + uid + " (storyID) VALUES ('" + storyID + "');";
                     statement = connection.createStatement();
                     statement.executeUpdate(query);
-                    response.sendRedirect("profile.jsp?user=" + rid);
+
+                    while(result.next()){
+
+                        query = "INSERT INTO UT" + result.getString("friendID") + " (storyID) VALUES ('" + storyID + "');";
+                        statement = connection.createStatement();
+                        statement.executeUpdate(query);
+
+                    }
+                    response.sendRedirect("homePage.jsp");
                 }
             }
             if (valid == false) {

@@ -8,6 +8,7 @@
     String city = null;
     String state = null;
     String profilePic = null;
+    String status = null;
 
     String query = null;
     Connection connection = null;
@@ -17,6 +18,10 @@
     Connection connection2 = null;
     Statement statement2 = null;
     ResultSet result2 = null;
+
+    Connection connection3 = null;
+    Statement statement3 = null;
+    ResultSet result3 = null;
 
     Integer uid = null;
     uid = (Integer) session.getAttribute("userID");
@@ -120,9 +125,43 @@
 <body>
 
 	<div id="tab-content">
-    <div id="tab-01">        
+    <div id="tab-01">
         
+        <%
+        query= "SELECT * FROM UT" + uid + " ORDER BY storyID DESC;";
+        statement = connection.createStatement();
+        result = statement.executeQuery(query);
 
+        while(result.next()){
+            query="SELECT * FROM storyTable WHERE storyID='" + result.getString("storyID") +"';";
+            statement2 = connection.createStatement();
+            result2 = statement2.executeQuery(query);
+            
+            if(result2.next()){
+                query= "SELECT * FROM quad_user_table WHERE UserID='" + result2.getString("authorID") + "';";
+                statement3 = connection.createStatement();
+                result3 = statement3.executeQuery(query);
+                
+                if(result3.next()){
+                    profilePic= result3.getString("profilePic");
+                    name = result3.getString("Firstname") + " " + result3.getString("Lastname");
+                    status = result2.getString("content");
+        %>
+        <div id="status">
+            <div id="statusSpacing">
+            </div>
+            <div>        	
+                <img id="profilePic" src="<%=profilePic%>" />
+                <h3 id="userName"><%=name%></h3>
+
+            </div>
+            <div id="statusText">
+                <p><%=status%></p>
+
+            </div>
+        </div> 
+            
+        <%}}}%>
 
     </div>
     <div id="tab-02">

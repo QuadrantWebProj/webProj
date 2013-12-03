@@ -125,7 +125,6 @@
                 Boolean friend=false;
                 Boolean requested=false;
 
-
                 query = "SELECT * FROM friendTable WHERE UserID='" + uid + "';";
                 statement = connection.createStatement();
                 result = statement.executeQuery(query);
