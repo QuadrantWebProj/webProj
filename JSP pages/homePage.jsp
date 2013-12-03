@@ -175,7 +175,10 @@
             statement2 = connection.createStatement();
             result2 = statement2.executeQuery(query);
             if(!result2.next() & tempID != uid){
-
+                query = "SELECT * FROM friendTable WHERE UserID='" + uid + "' AND friendID='" + tempID + "';";
+                statement2 = connection.createStatement();
+                result2 = statement2.executeQuery(query);
+                if(!result2.next()){
                 name = result.getString("Firstname") + " " + result.getString("Lastname");
                 profilePic = result.getString("profilePic");
         %>
@@ -194,7 +197,7 @@
                 </div>
             </div>
 
-        <%}}%>
+        <%}}}%>
     </div>
     
     
