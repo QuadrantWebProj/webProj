@@ -128,7 +128,7 @@
     <div id="tab-02">
         <%//now retrieve account requested through parameter send with url
         int tempID= 0;
-        query = "SELECT * FROM friendTable WHERE friendID='" + uid + "';";
+        query = "SELECT * FROM friendTable WHERE friendID='" + uid + "' AND requestOrExisting='req';";
         statement = connection.createStatement();
         result = statement.executeQuery(query);
 
