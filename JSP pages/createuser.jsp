@@ -42,6 +42,10 @@
                 query = "SELECT * FROM quad_user_table WHERE UserID='" + id + "';";
                 result = statement.executeQuery(query);
             } while (result.next());
+
+            query = "CREATE TABLE UT" + id + " ( storyID varchar(50));";
+            statement.executeUpdate(query);
+
             /* email appears to be unique, create new user in DB */
             query = "INSERT INTO quad_user_table (Email, Firstname, Lastname, UserID, Password, City, State, profilePic) "
                     + "VALUES ('" + email + "', '" + firstname + "', '" + lastname + "', '" + id + "', '" + password + "', '" + city + "', '" + state + "', '" + profilePic + "');";
